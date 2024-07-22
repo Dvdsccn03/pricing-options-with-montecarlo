@@ -292,8 +292,8 @@ max_price = max(BSput, MCput, american_put_price) + 1.5
 
 fig6 = go.Figure()
 fig6.add_trace(go.Bar(y=[BSput], x=["BS Put"], name='Black-Scholes European Put', marker_color="#483D8B"))
-fig6.add_trace(go.Bar(y=[MCput], x=["MC European Put"], name='Monte Carlo European Call Estimate', marker_color="#3CB371"))
-fig6.add_trace(go.Bar(y=[american_put_price], x=["MC American Put"], name='Monte Carlo American Call Estimate', marker_color="#DAA520"))
+fig6.add_trace(go.Bar(y=[MCput], x=["MC European Put"], name='Monte Carlo European Put Estimate', marker_color="#3CB371"))
+fig6.add_trace(go.Bar(y=[american_put_price], x=["MC American Put"], name='Monte Carlo American Put Estimate', marker_color="#DAA520"))
 fig6.update_layout(title="Comparison of Put Option Pricing Models", yaxis_title="Price", yaxis=dict(range=[min_price, max_price]), showlegend=True, legend=dict(yanchor="top", y=1, xanchor="left", x=0))
 
 
