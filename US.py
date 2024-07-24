@@ -52,7 +52,7 @@ st.write("To simulate the future paths of stock prices, the model uses geometric
 
 
 # sidebar parameters
-st.sidebar.header('Input otpion parameters')
+st.sidebar.header('Input option parameters')
 S = st.sidebar.number_input('Stock price (S)', min_value=0.00, value=100.00)
 K = st.sidebar.number_input('Strike price (K)', min_value=0.00, value=100.00)
 date = st.sidebar.date_input('Expiry Date', value=dt.datetime(2025,9,19))
