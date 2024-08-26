@@ -47,7 +47,7 @@ with col2: st.markdown("""Created by
         </button>
     </a>
     """, unsafe_allow_html=True)
-st.write("To simulate the future paths of stock prices, the model uses geometric Brownian motion. This involves starting with the current stock price and generating future prices by applying both a deterministic trend (drift) and random fluctuations (volatility) at each time step. The price changes follow a log-normal distribution, reflecting the continuous and multiplicative nature of stock price movements. By repeating this process many times, we create numerous possible future price trajectories.")
+st.write("To simulate how stock prices might change in the future, the model uses a method called geometric Brownian motion. This approach starts with the current price of the stock and projects future prices by combining two key elements: a deterministic trend, known as the drift, which represents the expected direction of the stock's movement over time, and random fluctuations, or volatility, which account for the uncertainty and variability in the market. \n \n At each step in the simulation, the model adjusts the stock price by applying both the drift (risk-free rate), and random changes that introduce unpredictability. These random changes are modeled using a log-normal distribution, which is appropriate because stock prices tend to grow exponentially over time and cannot go below zero. \n \n By repeating this process many times, the model generates a large number of possible future price paths. Each of these paths represents a different scenario of how the stock price could evolve, taking into account both the general market trend and the random nature of price movements. This collection of simulated paths provides a comprehensive view of the range of outcomes that the stock price might experience in the future.")
 
 
 
@@ -141,7 +141,7 @@ with colb:
 
 st.write("")
 st.header("European Options")
-st.write("Monte Carlo simulations are used to model the possible future price paths of the stock. This involves simulating a large number of random price paths based on the stock's volatility and calculating the option's payoff for each path. The average payoff, discounted back to present value, provides the estimated option price.")
+st.write("Monte Carlo simulations provide a way to model the potential future price paths of a stock by generating numerous hypothetical scenarios based on the stock's volatility. For each simulated path, the option's potential payoff is calculated, allowing us to capture a wide range of possible outcomes. By averaging these payoffs and discounting them to their present value, we obtain an estimate of the option's price, reflecting the comprehensive range of scenarios considered in the simulation.")
 col1, col2 = st.columns(2)
 with col1: st.metric(label='Montecarlo call option price', value=f"${MCcall:.2f}")
 with col2: st.metric(label='Montecarlo put option price', value=f"${MCput:.2f}")
@@ -180,8 +180,8 @@ st.plotly_chart(fig4)
 st.write("")
 st.write("")
 st.header("American Options")
-st.write("To price American options, which can be exercised anytime before they expire, we use the Least Squares Monte Carlo (LSMC) method. This method involves simulating many possible future price paths for the asset. At each step, we check if exercising the option immediately is better than holding it. To decide this, we compare the immediate payoff with the estimated value of holding the option, calculated using regression. The method then determines the best action—hold or exercise. We discount these cash flows back to the present using the risk-free rate. Finally, we average these discounted values from all simulations to get the option's price.")
-st.write("Note: The method described doesn't always give prices for American options that are higher than European option prices. To address this, the function reports the higher value between the two prices.")
+st.write("To price American options, which offer the flexibility to be exercised at any point before expiration, we utilize the Least Squares Monte Carlo (LSMC) method. This approach begins by simulating numerous potential future price paths for the underlying asset. At each point along these paths, the method evaluates whether it is more advantageous to exercise the option immediately or to continue holding it. This decision is made by comparing the immediate payoff from exercising the option with the estimated value of holding it, which is determined through a regression analysis of the future payoffs. \n The method systematically determines the optimal action—whether to hold or exercise the option—at each step of the simulation. The cash flows associated with these optimal actions are then discounted back to the present using the risk-free interest rate. Finally, by averaging the discounted values across all simulated paths, we arrive at an estimate of the option's price.")
+st.write("NOTE: It's important to note that the Least Squares Monte Carlo (LSMC) method, while effective, does not always yield prices for American options that are consistently higher than those of European options, despite the American option's added flexibility of early exercise. To ensure accuracy and fairness in pricing, the method includes a safeguard: it calculates both the American and European option prices and then reports the higher of the two. This approach ensures that the option is valued correctly, reflecting the maximum benefit the holder could potentially realize.")
 
 
 
