@@ -157,7 +157,7 @@ with col2:
 
 
 # Payoff plot
-bins = [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, max(max(payoff_call), max(payoff_put))]
+bins = [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, max(max(payoff_call), max(payoff_put), 110)]
 payoff_call_bins = pd.cut(payoff_call, bins=bins, right=False)
 payoff_put_bins = pd.cut(payoff_put, bins=bins, right=False)
 
@@ -205,7 +205,7 @@ def US_call(S, K, T, r, sigma):
     # Last day payoff
     cash_flows = np.maximum(path[:,-1] - K, 0)
 
-    for t in range(nSteps, 0, -1):
+    for t in range(nSteps-1, 0, -1):
         itm = path[:, t] > K
         X = path[itm, t]
         Y = cash_flows[itm] * np.exp(-r * dt)
@@ -216,8 +216,6 @@ def US_call(S, K, T, r, sigma):
             continuation_values = np.polyval(regression, X)
             exercise_values = np.maximum(X - K, 0)
             cash_flows[itm] = np.where(exercise_values > continuation_values, exercise_values, cash_flows[itm])
-            
-        cash_flows = cash_flows * np.exp(-r * dt)
     
     return np.mean(cash_flows)
 
@@ -243,7 +241,7 @@ def US_put(S, K, T, r, sigma):
     cash_flows = np.maximum(K - path[:,-1], 0)
 
     # Calculating continuation values
-    for t in range(nSteps, 0, -1):
+    for t in range(nSteps-1, 0, -1):
         itm = path[:, t] < K
         X = path[itm, t]
         Y = cash_flows[itm] * np.exp(-r * dt)
@@ -254,8 +252,6 @@ def US_put(S, K, T, r, sigma):
             continuation_values = np.polyval(regression, X)
             exercise_values = np.maximum(K - X, 0)
             cash_flows[itm] = np.where(exercise_values > continuation_values, exercise_values, cash_flows[itm])
-
-        cash_flows = cash_flows * np.exp(-r * dt)
     
     return np.mean(cash_flows)
 
