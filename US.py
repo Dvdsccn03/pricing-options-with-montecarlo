@@ -55,7 +55,7 @@ st.write("To simulate how stock prices might change in the future, the model use
 st.sidebar.header('Input option parameters')
 S = st.sidebar.number_input('Stock price (S)', min_value=0.00, value=100.00)
 K = st.sidebar.number_input('Strike price (K)', min_value=0.00, value=100.00)
-date = st.sidebar.date_input('Expiry Date', value=dt.datetime(2025,9,19))
+date = st.sidebar.date_input('Expiry Date', value=dt.datetime(2027,9,19))
 date = dt.datetime.combine(date, dt.datetime.min.time())
 T = (date - dt.datetime.today()).days / 365
 sigma = st.sidebar.number_input('Volatility (in decimal)', min_value=0.00, value=0.20)
